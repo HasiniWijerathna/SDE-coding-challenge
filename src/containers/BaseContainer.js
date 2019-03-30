@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {getSession, resetSession} from '../services/SessionService';
+import {Component} from 'react';
+import { resetSession} from '../services/SessionService';
 import {get, post, httDelete, put} from '../services/Requests';
 
 import history from '../history';

@@ -1,12 +1,10 @@
 import React from 'react'
-import {render, fireEvent, cleanup, waitForElement} from 'react-testing-library'
-
+import {render, cleanup} from 'react-testing-library'
 
 import User from './User';
 
 describe('User Card', () => {
     test('it renders the user', () => {
-      // Arrange
       const props = {
        
       key:1,
@@ -21,8 +19,6 @@ describe('User Card', () => {
       render(<User {...props} />)
     })
   })
-
-
 
 const id = 1;
 const firstname = 'John'

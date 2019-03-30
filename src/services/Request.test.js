@@ -3,7 +3,6 @@ import {cleanup} from 'react-testing-library'
 import axiosMock from 'axios';
 
 
-
   test('Generate headers', () => {
     const session = {
         authenticated: true,

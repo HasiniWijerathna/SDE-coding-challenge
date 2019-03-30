@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import PropTypes from 'prop-types';
+
 import Typography from '@material-ui/core/Typography';
 import EditIcon from '@material-ui/icons/Edit';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
@@ -61,19 +63,6 @@ class User extends Component {
             <div>
                 <ExpansionPanel key={this.props.userData.id}>
                     <ExpansionPanelSummary expandIcon={<EditIcon />}>
-                        {/* <div className="center-container">
-                            <div>
-                                <Avatar alt="Remy Sharp" src={this.props.userData.avatar} />
-                            </div>
-                            <div>
-                                <Typography className="center-container">
-                                    {this.props.userData.first_name + " " + this.props.userData.last_name}
-                                </Typography>
-                                <IconButton onClick={() => this.onRemoveItem(this.props.userData.id)} >
-                                    <DeleteIcon />
-                                </IconButton>
-                            </div>
-                        </div>  */}
                        <Grid container spacing={24}>
                             <Grid item xs={6}>
                                 <Grid container spacing={24}>
@@ -132,29 +121,6 @@ class User extends Component {
                             </Grid>
                         </Grid>
 
-                        {/* <TextField
-                            id="standard-name"
-                            label="First Name"
-                            defaultValue={this.setState.firstName ? this.setState.firstName : this.props.userData.first_name}
-                            margin="normal"
-                            onChange={this.onChangeFirstName}
-                            helperText={this.props.nameError.firstName}
-                        />
-                        <TextField
-                            id="standard-name"
-                            label="Last Name"
-                            defaultValue={this.props.userData.last_name}
-                            margin="normal"
-                            onChange={this.onChangeLastName}
-                            helperText={this.props.nameError.lastName}
-                        />
-                        <IconButton onClick={() => this.onUpdateItem(this.props.userData.id)} disabled={this.props.nameError.firstName != null || this.props.nameError.lastName != null } >
-                            <DoneIcon />
-                        </IconButton>
-                        <IconButton onClick={() => this.onRemoveItem(this.props.userData.id)} >
-                                    <DeleteIcon />
-                                </IconButton> */}
-
                     </ExpansionPanelDetails>
 
                 </ExpansionPanel>
@@ -162,5 +128,18 @@ class User extends Component {
             </div>
         );
     }
+    
 }
+User.propTypes = {
+    userData: PropTypes.object.isRequired,
+    onRemoveItem: PropTypes.func.isRequired,
+    onChangeFirstName: PropTypes.func.isRequired,
+    onChangeLastName: PropTypes.func.isRequired,
+    onUpdateItem: PropTypes.func.isRequired,
+    nameError: PropTypes.object.isRequired,
+  };
+
+
 export default User;
+
+

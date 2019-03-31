@@ -5,7 +5,11 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 
 import history from "../history";
+import errorImage from '../resources/notFound.gif'; 
 
+/**
+ * Representing the page not found class
+ */
 class NotFound extends Component {
 /**
 * Navigates user to the users page
@@ -22,7 +26,7 @@ class NotFound extends Component {
                             <CardMedia className="error-card-container"
                                 component="img"
                                 alt="Contemplative Reptile"
-                                image="https://cdn.dribbble.com/users/4215/screenshots/2291960/404-cat.gif"
+                                image={errorImage}
                                 title="Contemplative Reptile"
                                 onClick={this.navigateToHome}
                             />

@@ -8,6 +8,7 @@ import BaseContainer from './BaseContainer';
 
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { emailValidator, passwordValidator, confirmPasswordValidator} from '../utilities/validator'
 
 /**
  * Representing the logic of user registration
@@ -56,14 +57,7 @@ class Registration extends BaseContainer {
      * @return {String}       Relevent error of the incorrect email
      */
     static validateEmail(email = '') {
-        let error = null;
-
-        if (!email || email.length === 0) {
-            error = '';
-        } else if (email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-            error = 'Invalid email address';
-        }
-
+        const  error = emailValidator(email)
         return error;
     }
 
@@ -105,21 +99,9 @@ class Registration extends BaseContainer {
      * @return {String}          Relevent error of the incorrect password
      */
     static validatePassword(password = '', confirmPassword = '') {
-        let passwordError = null;
-        let confirmPasswordError = null;
 
-        if (!password || password.length === 0) {
-            passwordError = '';
-        } else if (password.length < 6) {
-            passwordError = 'Password must contain atleast 6 characters';
-        }
-
-
-        if (confirmPassword.length && password.length) {
-            if (password !== confirmPassword) {
-                confirmPasswordError = 'Confirm password does not match';
-            }
-        }
+       const passwordError = passwordValidator(password)
+       const confirmPasswordError = confirmPasswordValidator(password, confirmPassword)
 
         return { passwordError, confirmPasswordError };
     }

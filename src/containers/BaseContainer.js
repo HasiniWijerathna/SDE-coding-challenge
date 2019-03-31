@@ -74,9 +74,6 @@ class BaseComponent extends Component {
  * @return {Promise}      Request promise object
  */
   makePUTrequest(url, data) {
-    console.log('PUT URL AND DATA');
-    console.log(url);
-    console.log(data);
     return put(url, data)
     .then((response) => {
       return response;

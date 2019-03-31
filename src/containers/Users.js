@@ -79,7 +79,6 @@ class Users extends BaseContainer {
         });
         this.makeGETRequest(url)
             .then((response) => {
-                console.log(response)
                 this.setState({
                     loading: false,
                     usersData: response.data,
@@ -221,16 +220,6 @@ class Users extends BaseContainer {
      * @param  {String} event  The page click event
      */
     handlePagination = (event) => {
-        console.log(Number(event.target.id))
-        // if (this.state.searchTerm) {
-        //     this.setState({
-        //         currentPage: 1
-        //     });
-        // }
-        // this.setState({
-        //     currentPage: Number(event.target.id)
-        // });
-
         const url = modelURL('/users?page=' + Number(event.target.id));
         this.requestData(url);
 

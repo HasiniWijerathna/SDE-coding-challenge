@@ -241,6 +241,8 @@ test('Should filter users list by serach term', () => {
 
 });
 
+afterEach(cleanup)
+
 
 
 

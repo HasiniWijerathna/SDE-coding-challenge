@@ -12,10 +12,8 @@ const emailValidator = (email) => {
     } else if (email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
         error = 'Invalid email address';
     }
-
     return error;
   };
-
 
 /**
  * Returns the password validation error
@@ -50,6 +48,11 @@ const confirmPasswordValidator = (password = '', confirmPassword = '') => {
     return  confirmPasswordError ;
 }
 
+/**
+ * Returns the login password validation error
+ * @param  {String}  loginPassword   user login password
+ * @return {String}                  login password error
+ */
 const loginPasswordValidator = (password) => {
     let passwordError = '';
 
@@ -59,6 +62,11 @@ const loginPasswordValidator = (password) => {
     return passwordError ;
 }
 
+/**
+ * Returns the edit name validation error
+ * @param  {String}  name   user edit name
+ * @return {String}         edit name error
+ */
 const nameValidator = (name) => {
     let error = null
     if (!name || name.length === 0) {
@@ -70,13 +78,7 @@ const nameValidator = (name) => {
     } else if (name.split(" ").length > 1) {
         error = 'Invalid name';
     }
-
     return error
-
 }
-
-
-
-
 
   export {emailValidator, passwordValidator, confirmPasswordValidator, loginPasswordValidator, nameValidator};

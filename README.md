@@ -96,8 +96,4 @@ If users try to navigate to a route which does not exists, show a custom error m
 2. **API** does not persist edit and delete actions (on page reload)
 
 
-## License
-
-This project is licensed under the MIT License 
-
 

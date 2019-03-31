@@ -3,6 +3,7 @@ import React from 'react';
 import { modelURL } from '../services/urlFactory';
 import BaseContainer from './BaseContainer';
 import User from '../components/User';
+import PopupLoader from '../components/PopupLoader';
 
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -74,11 +75,13 @@ class Users extends BaseContainer {
         });
         this.makeGETRequest(url)
             .then((response) => {
-                this.setState({
-                    loading: false,
-                    usersData: response.data,
-                    displayedContacts: response.data
-                });
+                setTimeout(() => {
+                    this.setState({
+                        loading: false,
+                        usersData: response.data,
+                        displayedContacts: response.data
+                    });
+                }, 5000);
             })
             .catch((error) => {
                 this.setState({
@@ -293,7 +296,7 @@ class Users extends BaseContainer {
         const indexOfLastUser = currentPage * usersPerPage;
         const indexOfFirstUser = indexOfLastUser - usersPerPage;
         const currentUsers = displayedContacts.slice(indexOfFirstUser, indexOfLastUser);
-
+        let content = null
         const renderUsers = currentUsers.map((user, index) => {
             return <div key={index}>
                 <User
@@ -305,6 +308,7 @@ class Users extends BaseContainer {
                     onUpdateItem={() => this.onUpdateItem(user.id)}
                     nameError={this.state.error}
                 />
+
             </div>;
         });
         const renderPageNumbers = pageNumbers.map(number => {
@@ -316,6 +320,73 @@ class Users extends BaseContainer {
                 </a>
             );
         });
+
+        if (!this.state.loading) {
+            content = (
+                <div>
+                    <div className="card-container">
+                        <Card className="row">
+                            <CardContent>
+                                <div className="card-card-container">
+                                    <div className="card-header">
+                                        <div className="card-user-action-container">
+                                            <div className=" flex-2">
+                                                <TextField
+                                                    id="outlined-uncontrolled"
+                                                    label="Search"
+                                                    margin="normal"
+                                                    type="search"
+                                                    variant="outlined"
+                                                    onChange={this.searchHandler}
+                                                />
+                                            </div>
+                                            <div className="card-user-action-button card-header-filter">
+                                                <div className="">
+                                                    <form>
+                                                        <FormControl>
+                                                            <InputLabel htmlFor="age-helper">Sort By</InputLabel>
+                                                            <Select
+                                                                value={this.state.filterValue}
+                                                                onChange={this.handleSortBy}
+                                                                input={<Input name="filterValue"
+                                                                    id="age-helper" />}>
+                                                                <MenuItem value={'firstName'}>First
+                                                                            name</MenuItem>
+                                                                <MenuItem value={'lastName'}>Last
+                                                                            name</MenuItem>
+                                                            </Select>
+                                                            <FormHelperText>Sort Users List </FormHelperText>
+                                                        </FormControl>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="card-content">
+                                        {renderUsers}
+                                    </div>
+                                    <div className="card-footer">
+                                        <div className="pagination">
+                                            <a>&laquo;</a>
+                                            {renderPageNumbers}
+                                            <a>&raquo;</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </CardContent>
+                        </Card>
+                    </div>
+                </div>
+
+            )
+        } else {
+            content = (
+                <PopupLoader 
+                loading ={this.state.loading}
+                />
+            )
+        }
+
         return (
             <div>
                 <div>
@@ -325,57 +396,8 @@ class Users extends BaseContainer {
                         <Grid item xs={3}>
                         </Grid>
                         <Grid item xs={6}>
-                            <div className="card-container">
-                                <Card className="row">
-                                    <CardContent>
-                                        <div className="card-card-container">
-                                            <div className="card-header">
-                                                <div className="card-user-action-container">
-                                                    <div className=" flex-2">
-                                                        <TextField
-                                                            id="outlined-uncontrolled"
-                                                            label="Search"
-                                                            margin="normal"
-                                                            type="search"
-                                                            variant="outlined"
-                                                            onChange={this.searchHandler}
-                                                        />
-                                                    </div>
-                                                    <div className="card-user-action-button card-header-filter">
-                                                        <div className="">
-                                                            <form>
-                                                                <FormControl>
-                                                                    <InputLabel htmlFor="age-helper">Sort By</InputLabel>
-                                                                    <Select
-                                                                        value={this.state.filterValue}
-                                                                        onChange={this.handleSortBy}
-                                                                        input={<Input name="filterValue"
-                                                                            id="age-helper" />}>
-                                                                        <MenuItem value={'firstName'}>First
-                                                                            name</MenuItem>
-                                                                        <MenuItem value={'lastName'}>Last
-                                                                            name</MenuItem>
-                                                                    </Select>
-                                                                    <FormHelperText>Sort Users List </FormHelperText>
-                                                                </FormControl>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="card-content">
-                                                {renderUsers}
-                                            </div>
-                                            <div className="card-footer">
-                                                <div className="pagination">
-                                                    <a>&laquo;</a>
-                                                    {renderPageNumbers}
-                                                    <a>&raquo;</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </CardContent>
-                                </Card>
+                            <div >
+                                {content}
                             </div>
                         </Grid>
                         <Grid item xs={3}>

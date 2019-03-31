@@ -42,11 +42,14 @@ $ npm test
 
 ### Features
 1. Includes a Registration and Login page which takes user email and password
-*  Registration validation
-     > Pattern:
-Email validation
-password at least should contains 6 characters
-Password and confirm password should be matched
+
+#### Registration validation
+
++ Email validation
++ Password at least should contains 6 characters
++ Password and confirm password should be matched
+
+  ![GitHub Logo](https://user-images.githubusercontent.com/20472144/55289372-b2e72b80-53f8-11e9-88c5-5ec8fff745bf.gif)
 
 2. After successful login attempt navigates to users page where users are listed down
 3. Use delayed response of 5seconds to show a loader icon on a popup*
@@ -66,10 +69,20 @@ First and last name should not be multi-word input (e.g: A valid first name attr
 Once updated, the row reflects the change
 
          *  Each row contains option to Edit the item, or Delete the item from the list
+         
+         ![GitHub Logo](https://user-images.githubusercontent.com/20472144/55289333-fab98300-53f7-11e9-982b-4d4b988ae544.gif)
+         
+                
+         
 * On click of Delete
 The item can be deleted from the list of users
+
+  ![GitHub Logo](https://user-images.githubusercontent.com/20472144/55290183-81735d80-5402-11e9-8090-d93968df3ebd.gif)
+
 On click of Logout button, the user natigates to login page
 If users try to navigate to a route which does not exists, show a custom error message
+
+![GitHub Logo](https://user-images.githubusercontent.com/20472144/55290540-0c565700-5407-11e9-85cf-69a78ee0d659.gif)
 
 ### Assumptions
 
@@ -82,6 +95,6 @@ If users try to navigate to a route which does not exists, show a custom error m
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License 
 
 

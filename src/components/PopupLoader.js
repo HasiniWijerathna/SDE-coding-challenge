@@ -24,9 +24,9 @@ class PopupLoader extends React.Component {
                     <DialogContent>
                             <CardMedia className="error-card-container"
                                 component="img"
-                                alt="Contemplative Reptile"
+                                alt="Please wait"
                                 image={spinner}
-                                title="Contemplative Reptile"
+                                title="Please wait"
                                 onClick={this.navigateToHome}
                             />
                     </DialogContent>

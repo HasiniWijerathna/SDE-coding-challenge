@@ -17,10 +17,10 @@ const routes = (
   <App>
     <Router history={history}>
       <Switch>
-        <Route path="/login" component={Login} component={CheckAuth(Login)}/>
-        <Route path="/users" component={Users} component={CheckAuth(Users)} />
-        <Route path="/" component={Home}/>
-        <Route path="/registration" component={Registration} />
+        <Route exact path="/login" component={Login} component={CheckAuth(Login)}/>
+        <Route exact path="/users" component={Users} component={CheckAuth(Users)} />
+        <Route exact path="/" component={Home}/>
+        <Route exact path="/registration" component={Registration} />
         <Route component={NotFound} />
       </Switch>
     </Router>

@@ -1,7 +1,7 @@
 import React from 'react'
 import {render, cleanup} from 'react-testing-library'
 
-import User from './User';
+import User from '../components/User';
 
 describe('User Card', () => {
     test('it renders the user', () => {

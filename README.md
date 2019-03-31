@@ -31,7 +31,7 @@ $ npm test
 
 ### Pre requisites
 
-- Node.js (v6.0.0 or greater)
+- Node.js (v8.0.0 or greater)
 
 ### Technologies and Stack
 

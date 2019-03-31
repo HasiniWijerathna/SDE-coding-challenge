@@ -229,8 +229,6 @@ class Users extends BaseContainer {
      * Inject users per page
      */
     injectPagination = () => {
-
-        const { displayedContacts, usersPerPage } = this.state;
         // Logic for displaying page numbers
         const pageNumbers = [];
         for (let i = 1; i <= this.state.totalPages; i++) {
@@ -354,14 +352,14 @@ class Users extends BaseContainer {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="card-content">
+                                    <div className="card-content card-scroll">
                                         {renderUsers}
                                     </div>
                                     <div className="card-footer">
                                         <div className="pagination">
-                                            <a>&laquo;</a>
+                                            <span>&laquo;</span>
                                             {renderPageNumbers}
-                                            <a>&raquo;</a>
+                                            <span>&raquo;</span>
                                         </div>
                                     </div>
                                 </div>

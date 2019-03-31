@@ -357,9 +357,9 @@ class Users extends BaseContainer {
                                     </div>
                                     <div className="card-footer">
                                         <div className="pagination">
-                                            <span>&laquo;</span>
+                                            <span></span>
                                             {renderPageNumbers}
-                                            <span>&raquo;</span>
+                                            <span></span>
                                         </div>
                                     </div>
                                 </div>

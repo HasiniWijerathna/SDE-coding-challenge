@@ -1,0 +1,48 @@
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.login-card-header {
+    display: flex;
+    flex-direction: column;
+    flex: 3;
+}
+
+.login-card-header-logo {
+    display: flex;
+    flex: 3;
+    justify-content: center;
+
+}
+
+
+.login-card-header-logo-content {
+    height: 154px;
+    width: 154px;
+    margin-top: 2%;
+
+}
+
+.login-logo {
+    background-image: url(../resources/user.png);
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+
+}
+
+.login-card-header-text {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+
+}
+
+.login-card {
+    width: 30vh;
+}
+

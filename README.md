@@ -57,6 +57,9 @@ $ npm test
     * Search by first name and filtwerwerwer
     * A Tabular view to show each items divided by rows
     * Add Pagination support. Each page contains have maximum 1 item to show.
+    
+      ![GitHub Logo](https://user-images.githubusercontent.com/20472144/55290954-34948480-540c-11e9-8a6a-0d634705f1ef.gif)
+      
 5. The individual rows of resources in the list, contains following
     * user profile image/ avatar, first name, last name
       *  Each row contains option to Edit the item, or Delete the item from the list

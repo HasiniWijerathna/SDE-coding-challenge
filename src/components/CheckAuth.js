@@ -1,7 +1,7 @@
 import React from 'react';
-import { isAuthenticated } from '../../services/SessionService/SessionService';
+import { isAuthenticated } from '../services/SessionService';
 
-import history from '../../history';
+import history from '../history';
 
 /**
  * Representing the logic of require router authentication functionality
@@ -12,7 +12,7 @@ const CheckAuth = (Component) => {
         checkAuth = () => {
             const authenticated = isAuthenticated();
             if (authenticated) {
-                this.props.history.push('/users')
+                history.push('/users');
             } else {
                 history.push('/login')
             }

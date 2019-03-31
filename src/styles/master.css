@@ -1,10 +1,261 @@
 .login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+html, body {
+  margin: 0;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 1.2em;
+}
+
+
+.center-container {
+  display: flex;
+  justify-content: center;
+}
+
+#page-numbers {
+  list-style: none;
+  display: flex;
+}
+
+#page-numbers > li {
+  margin-right: 0.3em;
+  color: white;
+  user-select: none;
+  cursor: pointer;
+}
+
+body {
+  background: url(../resources/m4.jpg) no-repeat center top;
+  /*background-size: cover;
+
+
+  body {
+    background: url(../resources/login_bg.jpg) no-repeat center top;
+    /*background-size: cover;*/
+}
+
+.error-card-container{
+    height: 5%;
+}
+
+.center-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+
+
+}
+
+.flex-end-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10%;
+  width: 100%;
+
+
+}
+
+.form-card-container{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-  }
+        border-radius: .5em;
+        padding: 2%;
+}
 
-  .center-container {
+.form-user-card-container{
+  display: flex;
+  flex-direction: row;
+
+}
+
+.form-card-head{
     display: flex;
+    flex: 1;
+    height: 100%;
+}
+
+
+.form-text-fields{
+    width: 100%;
+    display: flex;
+}
+
+.card-header-text-content{
+  font-family: 'Roboto', Arial, sans-serif;
+    font-size: xx-large;
+    padding-top: 3%;
+}
+
+.form-card-actions-container{
+    display: flex;
+    width: 100%;
+    padding-bottom: 2vh;
+    padding-left: 5vh;
+    padding-right: 5vh;
+}
+
+.card-primary-button{
+    display: flex;
+    flex: 1;
     justify-content: center;
-  }
+    padding-top: 5%;
+    font-family: 'Roboto', Arial, sans-serif;
+
+}
+
+.card-secondary-button{
+    display: flex;
+    flex: 3;
+    justify-content: flex-end;
+    font-family: 'Roboto', Arial, sans-serif;
+
+}
+
+.search-bar {
+    height: 150px;
+    width: 100%;
+}
+
+
+.card-user-name{
+    text-align: center;
+}
+
+.card-user-avatar{
+    /*padding-top: 10%;*/
+
+}
+
+.card-user-content{
+  padding-top: 3%;
+  padding-left: 3%;
+
+}
+
+.card-user-action-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+
+
+}
+
+.card-user-action-content{
+  display: flex;
+  flex: 3;
+}
+
+.card-user-action-button{
+  justify-content: flex-end;
+  display: flex;
+  flex: 1;
+
+}
+
+.card-container{
+  display: flex;
+  position: absolute;
+  top: 15%;
+  left: 0;
+  height: 75%;
+  width: 100%;
+}
+
+.card-container .row {
+  margin: 0 auto;
+  position:relative;
+}
+
+.card-card-container{
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+
+
+}
+
+.card-header{
+  display: flex;
+  width: 100%;
+  flex: 1;
+  /*background-color: #44a2ff;*/
+}
+
+.card-content{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  flex: 3;
+}
+
+.card-footer{
+  display: flex;
+  flex-direction: column;
+  position:absolute;
+  bottom:0px;
+  left:0px;
+  /*width: 100%;*/
+  /*flex: 1;*/
+}
+
+.flex-2 {
+  flex: 3;
+  display: flex;
+  padding-bottom: 10px;
+
+
+
+}
+
+
+.card-header-filter{
+  flex: 1;
+  width: 100px;
+  justify-content: center;
+  padding-right: 20px;
+  padding-top: 1%;
+  padding-bottom: 1%;
+
+}
+
+.search-bar-container{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.search-bar-signout{
+  display: flex;
+  padding-top: 50px;
+  padding-right: 50px;
+  justify-content: flex-end;
+}
+
+.pagination {
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+.pagination a {
+  color: #0540d2;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  font-size: medium;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+.app-bar{
+  background-color: #0540d2;
+}

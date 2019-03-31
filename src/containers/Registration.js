@@ -1,18 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 
+import {registerURL} from '../services/urlFactory';
+import {setSession} from '../services/SessionService';
 import history from '../history';
-
-import { registerURL } from '../services/urlFactory';
-import { setSession } from '../services/SessionService';
 import BaseContainer from './BaseContainer';
+import { emailValidator, 
+        passwordValidator,
+        confirmPasswordValidator
+        } from '../utilities/validator';
 
+import {withStyles} from "@material-ui/core";
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { emailValidator, passwordValidator, confirmPasswordValidator} from '../utilities/validator'
 
-/**
- * Representing the logic of user registration
- */
+
 class Registration extends BaseContainer {
 
     /**
@@ -32,9 +36,9 @@ class Registration extends BaseContainer {
             },
             formValid: false,
             error: {
-                email: Registration.validateEmail(),
-                password: Registration.validatePassword().passwordError,
-                confirmPassword: Registration.validatePassword().confirmPasswordError,
+                email: '',
+                password: '',
+                confirmPassword: ''
             },
             focused: {
                 username: false,
@@ -160,16 +164,14 @@ class Registration extends BaseContainer {
         };
         this.makePOSTrequest(registerURL(), data)
             .then((response) => {
-                console.log(response.data.token);
                 const session = {
                     authenticated: true,
                     token: response.data.token,
                 };
                 setSession(session);
-                history.push('/');
+                history.push('/users');
             })
             .catch((error) => {
-                console.log(error);
                 this.setState({
                     errorMessage: {
                         open: true,
@@ -178,67 +180,98 @@ class Registration extends BaseContainer {
                 });
             });
     }
+   /**
+   * Navigate to login
+   */
+  navigateToLogin = () => {
+    history.push('/login');
+  }
 
     /**
     * Describes the elements on the Registration page
     * @return {String} HTML elements
     */
     render() {
-        const errorEmail = !this.state.error.email
         return (
             <div className="center-container">
-                <div className="login-container">
-                    <div>
-                        <TextField
-                            id="standard-name"
-                            label="Email"
-                            margin="normal"
-                            type="email"
-                            variant="outlined"
-                            required
-                            value={this.state.user.email}
-                            onChange={this.onChangeEmail}
-                            error={!errorEmail}
-                            helperText={this.state.error.email}
-                        />
-                    </div>
-                    <div>
-                        <TextField
-                            id="standard-name"
-                            label="Password"
-                            margin="normal"
-                            required
-                            type="password"
-                            variant="outlined"
-                            value={this.state.user.password}
-                            onChange={this.onChangePassword}
-                            helperText={this.state.error.password}
-                        />
-                    </div>
-                    <div>
-                        <TextField
-                            id="standard-name"
-                            label="Confirm Password"
-                            margin="normal"
-                            required
-                            type="password"
-                            variant="outlined"
-                            value={this.state.user.confirmPassword}
-                            onChange={this.OnConfirmPassword}
-                            error={this.state.error.confirmPassword}
-                            helperText={this.state.error.confirmPassword}
-                        />
-                    </div>
-                    <div>
-                        <h2>
-                            <Button disabled={!this.state.formValid} onClick={this.onConfirm}>Create your account</Button>
-                        </h2>
-                    </div>
+                < Card>
+                    <CardContent>
+                        <div className="form-card-container">
+                            <div className="card-header-text-content">Create Account</div>
+                            <div className="form-card-content">
+                                <div>
+                                    <TextField className="form-text-fields"
+                                                id="standard-name"
+                                                label="Email"
+                                                margin="normal"
+                                                type="email"
+                                                variant="outlined"
+                                                required
+                                                value={this.state.user.email}
+                                                onChange={this.onChangeEmail}
+                                                helperText={this.state.error.email}
 
-                </div>
-
+                                />
+                                </div>
+                                <div><TextField className="form-text-fields"
+                                                 id="standard-name"
+                                                 label="Password"
+                                                 margin="normal"
+                                                 required
+                                                 type="password"
+                                                 variant="outlined"
+                                                 value={this.state.user.password}
+                                                 onChange={this.onChangePassword}
+                                                 helperText={this.state.error.password}
+                                />
+                                </div>
+                                <div>
+                                    <TextField className="form-text-fields"
+                                               id="standard-name"
+                                               label="Confirm Password"
+                                               margin="normal"
+                                               required
+                                               type="password"
+                                               variant="outlined"
+                                               value={this.state.user.confirmPassword}
+                                               onChange={this.OnConfirmPassword}
+                                               helperText={this.state.error.confirmPassword}
+                                    />
+                                </div>
+                                <div className="card-primary-button">
+                                    <CreateButton
+                                        variant="outlined"
+                                        onClick={this.onConfirm} disabled={!this.state.formValid} >Create</CreateButton>
+                                </div>
+                            </div>
+                        </div>
+                    </CardContent>
+                    <CardActions>
+                        <div className="form-card-actions-container">
+                            <div className="card-secondary-button">
+                                <Button size="small" onClick={this.navigateToLogin}>Already have an account?</Button>
+                            </div>
+                        </div>
+                    </CardActions>
+                </Card>
             </div>
         );
     }
 }
+const CreateButton = withStyles({
+    root: {
+        background: '#4CAF50',
+        borderRadius: 3,
+        "&:hover": {
+            backgroundColor: "#5bdd5f"
+        },
+        border: 0,
+        color: 'white',
+        height: 48,
+        width: 600,
+        padding: '0 30px',
+    },
+
+})(Button);
+
 export default Registration;

@@ -27,7 +27,7 @@ class Login extends BaseContainer {
   constructor(props) {
     super(props);
 
-    let pathname = '/';
+    let pathname = '/users';
     if (props.location.state && props.location.state.nextPathname) {
       pathname = props.location.state.nextPathname;
     }

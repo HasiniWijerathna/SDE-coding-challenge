@@ -4,6 +4,7 @@ import { modelURL } from '../services/urlFactory';
 import BaseContainer from './BaseContainer';
 import User from '../components/User';
 import PopupLoader from '../components/PopupLoader';
+import { nameValidator } from '../utilities/validator';
 
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -15,6 +16,8 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import HeaderBar from '../components/HeaderBar';
+
 /**
  * Representing the logic of updating and deleting user functionality
  */
@@ -45,10 +48,11 @@ class Users extends BaseContainer {
             // State attributes for pagination
             currentPage: 1,
             // Considered 1 element per page
-            usersPerPage: 2,
+            usersPerPage: 4,
             filterValue: '',
             name: 'firstName',
-            searchTerm: ''
+            searchTerm: '',
+            totalPages: 0
         };
     }
 
@@ -56,13 +60,13 @@ class Users extends BaseContainer {
      * Called after the component is mounted
      */
     componentDidMount() {
-        this.requestData();
+        const url = modelURL('/users?delay=5');
+        this.requestData(url);
     }
     /**
      * Request all data from the API
      */
-    requestData = () => {
-        const url = modelURL('/users?page=2');
+    requestData = (url) => {
         this.fetchData(url, true);
     }
     /**
@@ -75,13 +79,13 @@ class Users extends BaseContainer {
         });
         this.makeGETRequest(url)
             .then((response) => {
-                setTimeout(() => {
-                    this.setState({
-                        loading: false,
-                        usersData: response.data,
-                        displayedContacts: response.data
-                    });
-                }, 5000);
+                console.log(response)
+                this.setState({
+                    loading: false,
+                    usersData: response.data,
+                    displayedContacts: response.data,
+                    totalPages: response.total_pages
+                });
             })
             .catch((error) => {
                 this.setState({
@@ -103,7 +107,8 @@ class Users extends BaseContainer {
             .then((response) => {
                 this.setState({
                     firstName: '',
-                    lastName: ''
+                    lastName: '',
+                    loading: false,
                 })
             })
             .catch((error) => {
@@ -127,7 +132,8 @@ class Users extends BaseContainer {
         this.makeDELETErequest(url, id)
             .then((response) => {
                 this.setState({
-                    displayedContacts: filtredData
+                    displayedContacts: filtredData,
+                    loading: false,
                 })
             })
             .catch((error) => {
@@ -143,16 +149,7 @@ class Users extends BaseContainer {
      */
     validateName = (name) => {
         let error = null;
-        if (!name || name.length === 0) {
-            error = 'Name is required';
-        } else if (name && !/^[a-zA-Z]*$/.test(name)) {
-            error = 'Invalid name';
-        } else if (!/[A-Z].*/.test(name)) {
-            error = 'Must starts with capital case';
-        } else if (name.split(" ").length > 1) {
-            error = 'Invalid name';
-        }
-
+        error = nameValidator(name);
         return error;
     }
     /**
@@ -175,7 +172,7 @@ class Users extends BaseContainer {
                     list,
                 };
             });
-            const url = modelURL('/users?page=2');
+            const url = modelURL('/users/' + id);
             this.updateData(url, id)
         }
     };
@@ -213,10 +210,10 @@ class Users extends BaseContainer {
      */
     onRemoveItem = id => {
         const filtredData = this.state.displayedContacts.filter((item) => {
-            return item.id != id
+            return item.id !== id
         });
 
-        const url = modelURL('/users?page=2');
+        const url = modelURL('/users/' + id);
         this.deleteData(url, filtredData, id);
     };
     /**
@@ -224,14 +221,20 @@ class Users extends BaseContainer {
      * @param  {String} event  The page click event
      */
     handlePagination = (event) => {
-        if (this.state.searchTerm) {
-            this.setState({
-                currentPage: 1
-            });
-        }
-        this.setState({
-            currentPage: Number(event.target.id)
-        });
+        console.log(Number(event.target.id))
+        // if (this.state.searchTerm) {
+        //     this.setState({
+        //         currentPage: 1
+        //     });
+        // }
+        // this.setState({
+        //     currentPage: Number(event.target.id)
+        // });
+
+        const url = modelURL('/users?page=' + Number(event.target.id));
+        this.requestData(url);
+
+
     }
     /**
      * Inject users per page
@@ -241,7 +244,7 @@ class Users extends BaseContainer {
         const { displayedContacts, usersPerPage } = this.state;
         // Logic for displaying page numbers
         const pageNumbers = [];
-        for (let i = 1; i <= Math.ceil(displayedContacts.length / usersPerPage); i++) {
+        for (let i = 1; i <= this.state.totalPages; i++) {
             pageNumbers.push(i);
         }
         return pageNumbers
@@ -267,9 +270,9 @@ class Users extends BaseContainer {
      */
     handleSortBy = event => {
         this.setState({ [event.target.name]: event.target.value });
-        if (event.target.value == 'firstName') {
+        if (event.target.value === 'firstName') {
             this.sortByFirstName();
-        } else if (event.target.value == 'lastName')
+        } else if (event.target.value === 'lastName')
             this.sortByLastName();
     };
 
@@ -290,7 +293,7 @@ class Users extends BaseContainer {
      * @return {String} HTML elements
      */
     render() {
-        const { currentPage, usersPerPage, displayedContacts, usersData, searchTerm } = this.state;
+        const { currentPage, usersPerPage, displayedContacts } = this.state;
         const pageNumbers = this.injectPagination()
         // Logic for the pagination
         const indexOfLastUser = currentPage * usersPerPage;
@@ -326,7 +329,7 @@ class Users extends BaseContainer {
                 <div>
                     <div className="card-container">
                         <Card className="row">
-                            <CardContent>
+                            <CardContent >
                                 <div className="card-card-container">
                                     <div className="card-header">
                                         <div className="card-user-action-container">
@@ -381,8 +384,8 @@ class Users extends BaseContainer {
             )
         } else {
             content = (
-                <PopupLoader 
-                loading ={this.state.loading}
+                <PopupLoader
+                    loading={this.state.loading}
                 />
             )
         }
@@ -392,6 +395,7 @@ class Users extends BaseContainer {
                 <div>
                     <Grid container spacing={24}>
                         <Grid item xs={12} className="search-bar">
+                        <HeaderBar/>   
                         </Grid>
                         <Grid item xs={3}>
                         </Grid>

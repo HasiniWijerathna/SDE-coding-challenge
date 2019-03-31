@@ -1,11 +1,24 @@
 {
-  "name": "test-my-lib",
+  "name": "coding-challnge",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^3.9.2",
+    "@material-ui/icons": "^3.0.2",
+    "@material-ui/styles": "^4.0.0-alpha.5",
+    "axios": "^0.18.0",
+    "bootstrap": "^4.3.1",
+    "flexboxgrid": "^6.3.1",
+    "hasinis_lb": "^0.1.0",
+    "history": "^4.9.0",
     "react": "^16.8.4",
+    "react-bootstrap": "^1.0.0-beta.6",
     "react-dom": "^16.8.4",
-    "react-scripts": "2.1.8"
+    "react-router": "^5.0.0",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "2.1.8",
+    "url-join": "^4.0.0",
+    "validator": "^10.11.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -21,5 +34,10 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "react-testing-library": "^6.0.2"
+  }
 }

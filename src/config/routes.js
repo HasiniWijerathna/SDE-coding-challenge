@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom'
 
 import App from '../App';
 import Login from '../containers/Login';
+import Home from '../containers/Home';
 import Users from '../containers/Users';
 import Registration from '../containers/Registration';
 import NotFound from '../components/NotFound';
@@ -18,6 +19,7 @@ const routes = (
       <Switch>
         <Route path="/login" component={Login} component={CheckAuth(Login)}/>
         <Route path="/users" component={Users} component={CheckAuth(Users)} />
+        <Route path="/" component={Home}/>
         <Route path="/registration" component={Registration} />
         <Route component={NotFound} />
       </Switch>

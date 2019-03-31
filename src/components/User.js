@@ -17,8 +17,6 @@ import CardContent from '@material-ui/core/CardContent';
 import { withStyles } from "@material-ui/core";
 import Button from '@material-ui/core/Button';
 
-
-//  LOADER IS MISSING!!!!!!!
 /**
  * Representing the user component functionality
  */

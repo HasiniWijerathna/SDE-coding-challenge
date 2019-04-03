@@ -14,7 +14,7 @@ $ npm install
 
 ### Development
 
-This application requires [Node.js] 84+ to run.
+This application requires [Node.js] 8.4+ to run.
 Install the dependencies and devDependencies and start the server.
 
 ```sh

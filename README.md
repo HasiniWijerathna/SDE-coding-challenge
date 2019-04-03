@@ -1,7 +1,6 @@
 
 # SDE Coding Challange
 
-A React JS application to fetch users from API.
 
 ## Getting Started
 ### Instalation
